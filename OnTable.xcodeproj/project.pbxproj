@@ -1,0 +1,504 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		364F013A2F2E42B0005E452E /* proposed_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 364F01392F2E42B0005E452E /* proposed_icon.png */; };
+		36DB52AF2F0554970086101C /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 36DB52AE2F0554970086101C /* SQLite */; };
+		F001 /* OnTableApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E001 /* OnTableApp.swift */; };
+		F002 /* Decision.swift in Sources */ = {isa = PBXBuildFile; fileRef = E002 /* Decision.swift */; };
+		F003 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = E003 /* Database.swift */; };
+		F004 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E004 /* DatabaseService.swift */; };
+		F005 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E005 /* HomeView.swift */; };
+		F006 /* DecisionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E006 /* DecisionView.swift */; };
+		F007 /* OptionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E007 /* OptionCard.swift */; };
+		F008 /* ProConRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E008 /* ProConRow.swift */; };
+		F009 /* ResolutionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009 /* ResolutionView.swift */; };
+		F010 /* ShareCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E010 /* ShareCardView.swift */; };
+		F011 /* ShareSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E011 /* ShareSheetView.swift */; };
+		F012 /* ShareService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E012 /* ShareService.swift */; };
+		F013 /* PremiumManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E013 /* PremiumManager.swift */; };
+		F014 /* RoomService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E014 /* RoomService.swift */; };
+		F015 /* RoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E015 /* RoomView.swift */; };
+		F016 /* QRDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E016 /* QRDisplayView.swift */; };
+		F017 /* QRScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E017 /* QRScannerView.swift */; };
+		F018 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E018 /* PaywallView.swift */; };
+		F019 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E019 /* SettingsView.swift */; };
+		F020 /* AIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E020 /* AIService.swift */; };
+		F021 /* AICompanionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E021 /* AICompanionView.swift */; };
+		F022 /* DecisionTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E022 /* DecisionTemplate.swift */; };
+		F023 /* TemplatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E023 /* TemplatesView.swift */; };
+		F024 /* OutcomeTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E024 /* OutcomeTrackingView.swift */; };
+		F026 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E026 /* OnboardingView.swift */; };
+		F027 /* LegalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E027 /* LegalView.swift */; };
+		F028 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E028 /* Assets.xcassets */; };
+		F029 /* DecisionHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E029 /* DecisionHistoryView.swift */; };
+		F030 /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E030 /* ConfettiView.swift */; };
+		F031 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E031 /* HapticManager.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		364F01392F2E42B0005E452E /* proposed_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = proposed_icon.png; sourceTree = "<group>"; };
+		D001 /* OnTable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTable.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E001 /* OnTableApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTableApp.swift; sourceTree = "<group>"; };
+		E002 /* Decision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decision.swift; sourceTree = "<group>"; };
+		E003 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		E004 /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
+		E005 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		E006 /* DecisionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionView.swift; sourceTree = "<group>"; };
+		E007 /* OptionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCard.swift; sourceTree = "<group>"; };
+		E008 /* ProConRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProConRow.swift; sourceTree = "<group>"; };
+		E009 /* ResolutionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolutionView.swift; sourceTree = "<group>"; };
+		E010 /* ShareCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCardView.swift; sourceTree = "<group>"; };
+		E011 /* ShareSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheetView.swift; sourceTree = "<group>"; };
+		E012 /* ShareService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareService.swift; sourceTree = "<group>"; };
+		E013 /* PremiumManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumManager.swift; sourceTree = "<group>"; };
+		E014 /* RoomService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomService.swift; sourceTree = "<group>"; };
+		E015 /* RoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomView.swift; sourceTree = "<group>"; };
+		E016 /* QRDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRDisplayView.swift; sourceTree = "<group>"; };
+		E017 /* QRScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerView.swift; sourceTree = "<group>"; };
+		E018 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
+		E019 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		E020 /* AIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIService.swift; sourceTree = "<group>"; };
+		E021 /* AICompanionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AICompanionView.swift; sourceTree = "<group>"; };
+		E022 /* DecisionTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionTemplate.swift; sourceTree = "<group>"; };
+		E023 /* TemplatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplatesView.swift; sourceTree = "<group>"; };
+		E024 /* OutcomeTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutcomeTrackingView.swift; sourceTree = "<group>"; };
+		E025 /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
+		E026 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		E027 /* LegalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalView.swift; sourceTree = "<group>"; };
+		E028 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E029 /* DecisionHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionHistoryView.swift; sourceTree = "<group>"; };
+		E030 /* ConfettiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
+		E031 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				36DB52AF2F0554970086101C /* SQLite in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		G001 = {
+			isa = PBXGroup;
+			children = (
+				G002 /* OnTable */,
+				G003 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		G002 /* OnTable */ = {
+			isa = PBXGroup;
+			children = (
+				E001 /* OnTableApp.swift */,
+				G004 /* Models */,
+				G005 /* Views */,
+				G006 /* Services */,
+				E028 /* Assets.xcassets */,
+				364F01392F2E42B0005E452E /* proposed_icon.png */,
+				E025 /* Configuration.storekit */,
+			);
+			path = OnTable;
+			sourceTree = "<group>";
+		};
+		G003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D001 /* OnTable.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		G004 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E002 /* Decision.swift */,
+				E003 /* Database.swift */,
+				E022 /* DecisionTemplate.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		G005 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E005 /* HomeView.swift */,
+				E006 /* DecisionView.swift */,
+				E007 /* OptionCard.swift */,
+				E008 /* ProConRow.swift */,
+				E009 /* ResolutionView.swift */,
+				E010 /* ShareCardView.swift */,
+				E011 /* ShareSheetView.swift */,
+				E015 /* RoomView.swift */,
+				E016 /* QRDisplayView.swift */,
+				E017 /* QRScannerView.swift */,
+				E018 /* PaywallView.swift */,
+				E019 /* SettingsView.swift */,
+				E021 /* AICompanionView.swift */,
+				E023 /* TemplatesView.swift */,
+				E024 /* OutcomeTrackingView.swift */,
+				E026 /* OnboardingView.swift */,
+				E027 /* LegalView.swift */,
+				E029 /* DecisionHistoryView.swift */,
+				E030 /* ConfettiView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		G006 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				E004 /* DatabaseService.swift */,
+				E012 /* ShareService.swift */,
+				E013 /* PremiumManager.swift */,
+				E014 /* RoomService.swift */,
+				E020 /* AIService.swift */,
+				E031 /* HapticManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		T001 /* OnTable */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B003 /* Build configuration list for PBXNativeTarget "OnTable" */;
+			buildPhases = (
+				C002 /* Sources */,
+				C001 /* Frameworks */,
+				C003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OnTable;
+			packageProductDependencies = (
+				36DB52AE2F0554970086101C /* SQLite */,
+			);
+			productName = OnTable;
+			productReference = D001 /* OnTable.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		P001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					T001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = B001 /* Build configuration list for PBXProject "OnTable" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = G001;
+			packageReferences = (
+				PKG001 /* XCRemoteSwiftPackageReference "SQLite.swift" */,
+			);
+			productRefGroup = G003 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				T001 /* OnTable */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				364F013A2F2E42B0005E452E /* proposed_icon.png in Resources */,
+				F028 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F001 /* OnTableApp.swift in Sources */,
+				F002 /* Decision.swift in Sources */,
+				F003 /* Database.swift in Sources */,
+				F004 /* DatabaseService.swift in Sources */,
+				F005 /* HomeView.swift in Sources */,
+				F006 /* DecisionView.swift in Sources */,
+				F007 /* OptionCard.swift in Sources */,
+				F008 /* ProConRow.swift in Sources */,
+				F009 /* ResolutionView.swift in Sources */,
+				F010 /* ShareCardView.swift in Sources */,
+				F011 /* ShareSheetView.swift in Sources */,
+				F012 /* ShareService.swift in Sources */,
+				F013 /* PremiumManager.swift in Sources */,
+				F014 /* RoomService.swift in Sources */,
+				F015 /* RoomView.swift in Sources */,
+				F016 /* QRDisplayView.swift in Sources */,
+				F017 /* QRScannerView.swift in Sources */,
+				F018 /* PaywallView.swift in Sources */,
+				F019 /* SettingsView.swift in Sources */,
+				F020 /* AIService.swift in Sources */,
+				F021 /* AICompanionView.swift in Sources */,
+				F022 /* DecisionTemplate.swift in Sources */,
+				F023 /* TemplatesView.swift in Sources */,
+				F024 /* OutcomeTrackingView.swift in Sources */,
+				F026 /* OnboardingView.swift in Sources */,
+				F027 /* LegalView.swift in Sources */,
+				F029 /* DecisionHistoryView.swift in Sources */,
+				F030 /* ConfettiView.swift in Sources */,
+				F031 /* HapticManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		B002 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access is needed to scan QR codes and join collaboration rooms.";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Local network access is needed to collaborate with nearby friends.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ontable.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access is needed to scan QR codes and join collaboration rooms.";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Local network access is needed to collaborate with nearby friends.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ontable.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B001 /* Build configuration list for PBXProject "OnTable" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B002 /* Debug */,
+				B004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B003 /* Build configuration list for PBXNativeTarget "OnTable" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B005 /* Debug */,
+				B006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		PKG001 /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.14.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		36DB52AE2F0554970086101C /* SQLite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = PKG001 /* XCRemoteSwiftPackageReference "SQLite.swift" */;
+			productName = SQLite;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = P001 /* Project object */;
+}
