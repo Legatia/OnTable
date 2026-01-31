@@ -201,6 +201,7 @@ class AIService {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("ontable_secret_key_v1", forHTTPHeaderField: "x-client-api-key") // TODO: Move to Info.plist or proper secret management
         request.timeoutInterval = 30
 
         // Send prompt to backend

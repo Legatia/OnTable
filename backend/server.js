@@ -2,24 +2,70 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const fetch = require('node-fetch');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Load API key from environment variable
+// Load config
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+const CLIENT_API_KEY = process.env.CLIENT_API_KEY;
+
+// Security Middleware
+app.use(helmet());
+
+// Rate Limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+app.use(limiter);
+
+// AI Endpoint Limiter (Stricter)
+const aiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 20, // 20 AI requests per 15 minutes
+  message: { error: 'Too many AI requests, please try again later.' }
+});
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production' ? false : '*', // Restrict in production
+  methods: ['GET', 'POST']
+}));
 app.use(express.json());
+
+// API Key Authentication Middleware
+const authenticateClient = (req, res, next) => {
+  const clientKey = req.headers['x-client-api-key'];
+
+  // Skip auth for health check or if not configured (dev mode fallback)
+  if (req.path === '/health') return next();
+
+  if (!CLIENT_API_KEY) {
+    console.warn('⚠️ CLIENT_API_KEY not set in environment - allowing request (DEV MODE)');
+    return next();
+  }
+
+  if (!clientKey || clientKey !== CLIENT_API_KEY) {
+    return res.status(401).json({ error: 'Unauthorized: Invalid Client API Key' });
+  }
+
+  next();
+};
+
+app.use(authenticateClient);
 
 // Health check
 app.get('/health', (req, res) => {
-  res.json({ status: 'ok', service: 'OnTable AI Proxy' });
+  res.json({ status: 'ok', service: 'OnTable AI Proxy', secure: true });
 });
 
 // AI suggestions endpoint
-app.post('/api/ai/suggestions', async (req, res) => {
+app.post('/api/ai/suggestions', aiLimiter, async (req, res) => {
   try {
     // Validate API key is set
     if (!GEMINI_API_KEY) {
@@ -92,6 +138,8 @@ if (process.env.NODE_ENV !== 'production') {
     console.log(`🚀 OnTable AI Proxy running on port ${PORT}`);
     console.log(`📍 Health check: http://localhost:${PORT}/health`);
     console.log(`🤖 AI endpoint: http://localhost:${PORT}/api/ai/suggestions`);
+    console.log(`🔒 Security: Helmet enabled, Rate Limiting active`);
+    console.log(CLIENT_API_KEY ? `🔑 Basic Auth: Enabled` : `⚠️ Basic Auth: DISABLED (Set CLIENT_API_KEY)`);
 
     if (!GEMINI_API_KEY) {
       console.warn('⚠️  WARNING: GEMINI_API_KEY not found in .env file!');
