@@ -64,6 +64,11 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', service: 'OnTable AI Proxy', secure: true });
 });
 
+// Root route
+app.get('/', (req, res) => {
+  res.send('OnTable AI Proxy is running. Go to /health for status.');
+});
+
 // AI suggestions endpoint
 app.post('/api/ai/suggestions', aiLimiter, async (req, res) => {
   try {
