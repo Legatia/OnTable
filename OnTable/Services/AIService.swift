@@ -6,10 +6,13 @@ class AIService {
     static let shared = AIService()
 
     // Backend proxy configuration
-    // For local development: http://localhost:3000
-    // For device testing: http://YOUR_MAC_IP:3000 (e.g., http://192.168.1.100:3000)
-    // For production: Update to your deployed backend URL
-    private let backendURL = "http://localhost:3000/api/ai/suggestions"
+    // Production: Vercel deployment
+    // For local testing: Change to http://localhost:3000/api/ai/suggestions
+    private let backendURL = "https://on-table-be.vercel.app/api/ai/suggestions"
+
+    // Client API Key for backend authentication
+    // This key must match CLIENT_API_KEY in your Vercel environment variables
+    private let clientAPIKey = "ontable_client_2024_secure_key_prod"
 
     // MARK: - Rate Limiting (Premium tier)
 
@@ -201,7 +204,7 @@ class AIService {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("ontable_secret_key_v1", forHTTPHeaderField: "x-client-api-key") // TODO: Move to Info.plist or proper secret management
+        request.addValue(clientAPIKey, forHTTPHeaderField: "x-client-api-key")
         request.timeoutInterval = 30
 
         // Send prompt to backend

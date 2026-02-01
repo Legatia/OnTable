@@ -50,3 +50,4 @@ pnpm-debug.log*
 .gemini/
 conversation.md
 proposed_icon.png
+docs/
