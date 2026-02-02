@@ -49,17 +49,28 @@ struct FeatureAccess {
     }
 
     var hasWatermark: Bool {
-        tier != .premium
+        tier == .free
     }
 
-    var availableTemplates: [ShareCardView.CardTemplate] {
+    var availableTemplates: [ShareCardTemplate] {
         switch tier {
         case .free:
             return [.classic]
         case .starter:
-            return [.classic, .minimal, .bold]
+            return [.classic, .minimal, .bold, .sunset, .ocean, .forest, .neon, .paper]
         case .premium:
-            return ShareCardView.CardTemplate.allCases
+            return ShareCardTemplate.allCases
+        }
+    }
+
+    func isTemplateUnlocked(_ template: ShareCardTemplate) -> Bool {
+        switch tier {
+        case .free:
+            return !template.isPremiumOnly
+        case .starter:
+            return template != .custom
+        case .premium:
+            return true
         }
     }
 
@@ -119,13 +130,17 @@ class PremiumManager: ObservableObject {
         FeatureAccess(tier: currentTier)
     }
 
-    // Legacy compatibility
+    // Unified paid status
     var isPremium: Bool {
-        currentTier == .premium
+        currentTier != .free
     }
 
     var isStarter: Bool {
         currentTier == .starter
+    }
+
+    func isTemplateUnlocked(_ template: ShareCardTemplate) -> Bool {
+        features.isTemplateUnlocked(template)
     }
 
     private var updateListenerTask: Task<Void, Error>?

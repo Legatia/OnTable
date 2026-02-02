@@ -5,7 +5,14 @@ struct ShareSheetView: View {
     @ObservedObject var premiumManager = PremiumManager.shared
     @Environment(\.dismiss) private var dismiss
 
-    @State private var selectedTemplate: ShareCardView.CardTemplate = .classic
+    @State private var selectedTemplate: ShareCardTemplate = .classic
+    @State private var backgroundImage: UIImage?
+    @State private var showingImagePicker = false
+    @State private var imageScale: CGFloat = 1.0
+    @State private var imageOffset: CGSize = .zero
+    @State private var lastScale: CGFloat = 1.0
+    @State private var lastOffset: CGSize = .zero
+    @State private var showingPaywall = false
 
     var body: some View {
         NavigationView {
@@ -14,8 +21,39 @@ struct ShareSheetView: View {
                 ShareCardView(
                     decision: decision,
                     isPremium: premiumManager.isPremium,
-                    template: selectedTemplate
+                    template: selectedTemplate,
+                    backgroundImage: backgroundImage,
+                    imageScale: imageScale,
+                    imageOffset: imageOffset
                 )
+                .gesture(
+                    selectedTemplate == .custom ?
+                    SimultaneousGesture(
+                        MagnificationGesture()
+                            .onChanged { value in
+                                let delta = value / lastScale
+                                lastScale = value
+                                let newScale = imageScale * delta
+                                imageScale = min(max(newScale, 1.0), 5.0)
+                            }
+                            .onEnded { _ in lastScale = 1.0 },
+                        DragGesture()
+                            .onChanged { value in
+                                imageOffset = CGSize(
+                                    width: lastOffset.width + value.translation.width,
+                                    height: lastOffset.height + value.translation.height
+                                )
+                            }
+                            .onEnded { value in
+                                lastOffset = imageOffset
+                            }
+                    ) : nil
+                )
+                .onTapGesture {
+                    if selectedTemplate == .custom {
+                        showingImagePicker = true
+                    }
+                }
                 .scaleEffect(0.8)
                 .frame(height: 340)
                 .shadow(color: .black.opacity(0.2), radius: 12, x: 0, y: 4)
@@ -28,13 +66,18 @@ struct ShareSheetView: View {
 
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 12) {
-                            ForEach(ShareCardView.CardTemplate.allCases, id: \.self) { template in
+                            ForEach(ShareCardTemplate.allCases, id: \.self) { template in
                                 TemplateButton(
                                     template: template,
                                     isSelected: selectedTemplate == template,
-                                    isLocked: template.isPremiumOnly && !premiumManager.isPremium,
+                                    isLocked: !premiumManager.isTemplateUnlocked(template),
                                     action: {
-                                        if !template.isPremiumOnly || premiumManager.isPremium {
+                                        if template == .custom {
+                                            selectedTemplate = template
+                                            if backgroundImage == nil {
+                                                showingImagePicker = true
+                                            }
+                                        } else {
                                             selectedTemplate = template
                                         }
                                     }
@@ -55,7 +98,7 @@ struct ShareSheetView: View {
                             .foregroundColor(.secondary)
                         Spacer()
                         Button("Upgrade") {
-                            // TODO: Show paywall
+                            showingPaywall = true
                         }
                         .font(Font.caption.weight(.semibold))
                     }
@@ -68,16 +111,26 @@ struct ShareSheetView: View {
                 Spacer()
 
                 // Share button
-                Button(action: shareCard) {
+                Button(action: {
+                    if isTemplateUnlocked {
+                        shareCard()
+                    } else {
+                        showingPaywall = true
+                    }
+                }) {
                     HStack {
-                        Image(systemName: "square.and.arrow.up")
-                        Text("Share to Social")
+                        if !isTemplateUnlocked {
+                            Image(systemName: "lock.fill")
+                        } else {
+                            Image(systemName: "square.and.arrow.up")
+                        }
+                        Text(isTemplateUnlocked ? "Share to Social" : "Unlock Template")
                     }
                     .font(.headline)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color.accentColor)
+                    .background(isTemplateUnlocked ? Color.accentColor : Color.orange)
                     .cornerRadius(12)
                 }
                 .padding(.horizontal)
@@ -93,13 +146,33 @@ struct ShareSheetView: View {
                 }
             }
         }
+        .sheet(isPresented: $showingPaywall) {
+            PaywallView()
+        }
+        .sheet(isPresented: $showingImagePicker) {
+            ImagePicker(selectedImage: $backgroundImage)
+                .onDisappear {
+                    // Reset transform when new image picked
+                    imageScale = 1.0
+                    imageOffset = .zero
+                    lastOffset = .zero
+                    lastScale = 1.0
+                }
+        }
+    }
+
+    private var isTemplateUnlocked: Bool {
+        premiumManager.isTemplateUnlocked(selectedTemplate)
     }
 
     private func shareCard() {
         ShareService.shared.shareDecision(
             decision,
             isPremium: premiumManager.isPremium,
-            template: selectedTemplate
+            template: selectedTemplate,
+            backgroundImage: backgroundImage,
+            imageScale: imageScale,
+            imageOffset: imageOffset
         )
     }
 }
@@ -107,7 +180,7 @@ struct ShareSheetView: View {
 // MARK: - Template Button
 
 struct TemplateButton: View {
-    let template: ShareCardView.CardTemplate
+    let template: ShareCardTemplate
     let isSelected: Bool
     let isLocked: Bool
     let action: () -> Void
@@ -118,17 +191,17 @@ struct TemplateButton: View {
                 // Template preview mini
                 ZStack {
                     templatePreview
-                        .frame(width: 60, height: 60)
-                        .cornerRadius(8)
 
                     if isLocked {
                         Color.black.opacity(0.5)
-                            .cornerRadius(8)
                         Image(systemName: "lock.fill")
                             .foregroundColor(.white)
                             .font(.caption)
                     }
                 }
+                .frame(width: 60, height: 60)
+                .cornerRadius(8)
+                .clipped()
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
                         .stroke(isSelected ? Color.accentColor : Color.clear, lineWidth: 2)
@@ -182,6 +255,12 @@ struct TemplateButton: View {
             Color.black
         case .paper:
             Color(red: 0.98, green: 0.96, blue: 0.92)
+        case .custom:
+            ZStack {
+                Color.gray
+                Image(systemName: "photo")
+                    .foregroundColor(.white)
+            }
         }
     }
 }

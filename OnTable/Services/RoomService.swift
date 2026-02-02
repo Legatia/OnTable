@@ -211,9 +211,17 @@ extension RoomService: MCSessionDelegate {
     private func handleMessage(_ message: RoomMessage, from peerID: MCPeerID) {
         switch message {
         case .decisionUpdate(let decision):
-            currentRoom?.decision = decision
+            if currentRoom == nil {
+                currentRoom = Room(hostName: peerID.displayName, decision: decision)
+            } else {
+                currentRoom?.decision = decision
+            }
 
         case .participantJoined(let participant):
+            if currentRoom == nil {
+                // Should not happen as host sends decision first, but for safety:
+                currentRoom = Room(hostName: "Host", decision: Decision())
+            }
             if currentRoom?.participants.contains(where: { $0.id == participant.id }) == false {
                 currentRoom?.participants.append(participant)
             }

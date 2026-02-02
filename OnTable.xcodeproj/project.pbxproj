@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		364F013A2F2E42B0005E452E /* proposed_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 364F01392F2E42B0005E452E /* proposed_icon.png */; };
+		364F013C2F300CD1005E452E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364F013B2F300CD1005E452E /* ImagePicker.swift */; };
 		36DB52AF2F0554970086101C /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 36DB52AE2F0554970086101C /* SQLite */; };
 		F001 /* OnTableApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E001 /* OnTableApp.swift */; };
 		F002 /* Decision.swift in Sources */ = {isa = PBXBuildFile; fileRef = E002 /* Decision.swift */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		364F01392F2E42B0005E452E /* proposed_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = proposed_icon.png; sourceTree = "<group>"; };
+		364F013B2F300CD1005E452E /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		D001 /* OnTable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E001 /* OnTableApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTableApp.swift; sourceTree = "<group>"; };
 		E002 /* Decision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decision.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 		G005 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				364F013B2F300CD1005E452E /* ImagePicker.swift */,
 				E005 /* HomeView.swift */,
 				E006 /* DecisionView.swift */,
 				E007 /* OptionCard.swift */,
@@ -271,6 +274,7 @@
 				F026 /* OnboardingView.swift in Sources */,
 				F027 /* LegalView.swift in Sources */,
 				F029 /* DecisionHistoryView.swift in Sources */,
+				364F013C2F300CD1005E452E /* ImagePicker.swift in Sources */,
 				F030 /* ConfettiView.swift in Sources */,
 				F031 /* HapticManager.swift in Sources */,
 			);
@@ -313,7 +317,9 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1.0;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 728D69ULX3;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -331,11 +337,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tobiasd.ontable;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -376,7 +384,9 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1.0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 728D69ULX3;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -388,10 +398,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tobiasd.ontable;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;

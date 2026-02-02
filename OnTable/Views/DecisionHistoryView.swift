@@ -383,7 +383,7 @@ struct DecisionHistoryCard: View {
                 // Content
                 VStack(alignment: .leading, spacing: 8) {
                     HStack {
-                        Text(decision.title.isEmpty ? "Untitled Decision" : decision.title)
+                        Text(decision.displayTitle)
                             .font(.headline)
                             .foregroundColor(.primary)
 

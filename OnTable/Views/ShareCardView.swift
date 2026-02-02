@@ -1,28 +1,32 @@
 import SwiftUI
 
+enum ShareCardTemplate: String, CaseIterable {
+    case classic = "Classic"
+    case minimal = "Minimal"
+    case bold = "Bold"
+    // Premium templates
+    case sunset = "Sunset"
+    case ocean = "Ocean"
+    case forest = "Forest"
+    case neon = "Neon"
+    case paper = "Paper"
+    case custom = "Photo" // Custom photo template
+
+    var isPremiumOnly: Bool {
+        switch self {
+        case .classic, .minimal, .bold: return false
+        case .sunset, .ocean, .forest, .neon, .paper, .custom: return true
+        }
+    }
+}
+
 struct ShareCardView: View {
     let decision: Decision
     let isPremium: Bool
-    let template: CardTemplate
-
-    enum CardTemplate: String, CaseIterable {
-        case classic = "Classic"
-        case minimal = "Minimal"
-        case bold = "Bold"
-        // Premium templates
-        case sunset = "Sunset"
-        case ocean = "Ocean"
-        case forest = "Forest"
-        case neon = "Neon"
-        case paper = "Paper"
-
-        var isPremiumOnly: Bool {
-            switch self {
-            case .classic, .minimal, .bold: return false
-            case .sunset, .ocean, .forest, .neon, .paper: return true
-            }
-        }
-    }
+    let template: ShareCardTemplate
+    var backgroundImage: UIImage? = nil
+    var imageScale: CGFloat = 1.0
+    var imageOffset: CGSize = .zero
 
     var body: some View {
         ZStack {
@@ -69,9 +73,26 @@ struct ShareCardView: View {
                     }
                     .font(.caption)
                     .foregroundColor(textColor.opacity(0.7))
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 8)
+                    .background(
+                        Group {
+                            if template == .custom {
+                                AnyView(
+                                    ZStack {
+                                        Capsule().fill(.ultraThinMaterial)
+                                        Capsule().fill(Color.black.opacity(0.2))
+                                    }
+                                )
+                            } else {
+                                AnyView(Color.clear)
+                            }
+                        }
+                    )
                 }
                 .padding(.top, 32)
                 .padding(.bottom, 16)
+                // Removed top blur as requested
 
                 Spacer()
 
@@ -252,8 +273,30 @@ struct ShareCardView: View {
             }
         }
         .frame(maxWidth: .infinity)
+        .frame(height: 160) // Fixed height to ensure winner/loser cards align perfectly
         .padding(.vertical, compact ? 12 : 16)
-        .background(isWinner ? accentColor.opacity(0.15) : Color.clear)
+        .background(
+            Group {
+                if template == .custom {
+                    // Custom Template (Glass) - Same base for winner/loser
+                    AnyView(
+                        ZStack {
+                            Rectangle().fill(.ultraThinMaterial)
+                            // Darker overlay for loser, lighter/golden for winner
+                            if isWinner {
+                                Color.yellow.opacity(0.15)
+                            } else {
+                                Color.black.opacity(0.2)
+                            }
+                        }
+                    )
+                } else if isWinner {
+                    AnyView(accentColor.opacity(0.15))
+                } else {
+                    AnyView(Color.clear)
+                }
+            }
+        )
         .cornerRadius(16)
     }
 
@@ -262,6 +305,22 @@ struct ShareCardView: View {
     @ViewBuilder
     private var templateBackground: some View {
         switch template {
+        case .custom:
+            if let image = backgroundImage {
+                GeometryReader { geometry in
+                    Image(uiImage: image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .scaleEffect(imageScale)
+                        .offset(imageOffset)
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+                        .clipped()
+                }
+                .overlay(Color.black.opacity(0.2)) // Re-add overlay for header text contrast
+            } else {
+                // Placeholder if no image selected yet
+                Color.gray
+            }
         case .classic:
             LinearGradient(
                 colors: [
@@ -333,7 +392,7 @@ struct ShareCardView: View {
         switch template {
         case .classic, .minimal, .paper:
             return .primary
-        case .bold, .sunset, .ocean, .forest, .neon:
+        case .bold, .sunset, .ocean, .forest, .neon, .custom:
             return .white
         }
     }
@@ -354,6 +413,8 @@ struct ShareCardView: View {
             return Color(red: 0.0, green: 1.0, blue: 0.9)  // Bright cyan
         case .paper:
             return Color(red: 0.85, green: 0.45, blue: 0.2)  // Burnt orange
+        case .custom:
+            return .white
         }
     }
 }

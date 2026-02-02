@@ -51,10 +51,8 @@ struct DecisionView: View {
                         }
                     }
 
-                    // Join Room - everyone can join
-                    Button(action: { showingJoinRoom = true }) {
-                        Label("Join Room", systemImage: "qrcode.viewfinder")
-                    }
+                    // Join Room moved to HomeView
+    
 
                     Divider()
 
@@ -146,12 +144,7 @@ struct DecisionView: View {
                 showingRoom = true
             }
         }
-        .onChange(of: roomService.isJoined) { isJoined in
-            if isJoined {
-                showingJoinRoom = false
-                showingRoom = true
-            }
-        }
+        // Removed Join Room detection as it belongs to HomeView now
     }
 
     // MARK: - Split View

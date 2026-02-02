@@ -10,6 +10,11 @@ struct HomeView: View {
     @State private var showingTemplates = false
     @State private var showingPaywall = false
     @State private var showingHistory = false
+    @State private var sharingDecision: Decision?
+    @State private var showingJoinRoom = false
+    @State private var showingRoom = false
+    @State private var decisionToJoin: Decision?
+    @ObservedObject private var roomService = RoomService.shared
 
     var body: some View {
         NavigationView {
@@ -54,6 +59,22 @@ struct HomeView: View {
                         .foregroundColor(.white)
                         .cornerRadius(12)
                     }
+
+                    // Join Room (Any user)
+                    Button(action: { showingJoinRoom = true }) {
+                        VStack(spacing: 8) {
+                            Image(systemName: "qrcode.viewfinder")
+                                .font(.title2)
+                            Text("Join")
+                                .font(.subheadline)
+                                .fontWeight(.medium)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 16)
+                        .background(Color.orange)
+                        .foregroundColor(.white)
+                        .cornerRadius(12)
+                    }
                 }
                 .padding()
 
@@ -75,8 +96,16 @@ struct HomeView: View {
                 } else {
                     List {
                         ForEach(databaseService.decisions) { decision in
-                            NavigationLink(destination: DecisionView(decision: decision).environmentObject(databaseService)) {
-                                DecisionRow(decision: decision)
+                            HStack {
+                                NavigationLink(destination: DecisionView(decision: decision).environmentObject(databaseService)) {
+                                    DecisionRow(decision: decision) {
+                                        if premiumManager.features.canShare {
+                                            sharingDecision = decision
+                                        } else {
+                                            showingPaywall = true
+                                        }
+                                    }
+                                }
                             }
                         }
                         .onDelete(perform: deleteDecisions)
@@ -135,6 +164,36 @@ struct HomeView: View {
                 DecisionHistoryView()
                     .environmentObject(databaseService)
             }
+            .sheet(item: $sharingDecision) { decision in
+                ShareSheetView(decision: decision)
+            }
+            .sheet(isPresented: $showingJoinRoom) {
+                QRScannerView()
+            }
+            .fullScreenCover(isPresented: $showingRoom) {
+                if let decision = decisionToJoin {
+                    NavigationView {
+                        RoomView(decision: Binding(
+                            get: { decision },
+                            set: { decisionToJoin = $0 }
+                        ), isHost: false)
+                        .environmentObject(databaseService)
+                    }
+                }
+            }
+            .onChange(of: roomService.isJoined) { isJoined in
+                if isJoined {
+                    // Wait for the room data to arrive via messages
+                    showingJoinRoom = false
+                    // RoomView will be shown once currentRoom is non-nil
+                }
+            }
+            .onChange(of: roomService.currentRoom) { room in
+                if roomService.isJoined, let room = room {
+                    decisionToJoin = room.decision
+                    showingRoom = true
+                }
+            }
         }
         .navigationViewStyle(.stack)
     }
@@ -173,6 +232,8 @@ struct HomeView: View {
 
 struct DecisionRow: View {
     let decision: Decision
+    let onShare: () -> Void
+    @ObservedObject var premiumManager = PremiumManager.shared
 
     private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -221,6 +282,27 @@ struct DecisionRow: View {
 
             Spacer()
 
+            // Quick share button
+            Button(action: onShare) {
+                ZStack(alignment: .topTrailing) {
+                    Image(systemName: "square.and.arrow.up")
+                        .foregroundColor(premiumManager.features.canShare ? .accentColor : .secondary)
+                    
+                    if !premiumManager.features.canShare {
+                        Image(systemName: "lock.fill")
+                            .font(.system(size: 8))
+                            .padding(2)
+                            .background(Color.white)
+                            .clipShape(Circle())
+                            .offset(x: 4, y: -4)
+                    }
+                }
+                .padding(8)
+                .background(premiumManager.features.canShare ? Color.accentColor.opacity(0.1) : Color.secondary.opacity(0.1))
+                .clipShape(Circle())
+            }
+            .buttonStyle(.plain) // Ensure it doesn't trigger the whole row
+
             Image(systemName: "chevron.right")
                 .font(.caption)
                 .foregroundColor(.secondary)
@@ -229,21 +311,7 @@ struct DecisionRow: View {
     }
 
     private var displayTitle: String {
-        if !decision.title.isEmpty {
-            return decision.title
-        }
-
-        // Get option titles that aren't empty
-        let optionTitles = decision.options.map { $0.title }.filter { !$0.isEmpty }
-
-        if optionTitles.count >= 2 {
-            let suffix = decision.options.count > 2 ? "..." : ""
-            return "\(optionTitles[0]) vs \(optionTitles[1])\(suffix)"
-        } else if optionTitles.count == 1 {
-            return optionTitles[0]
-        } else {
-            return "Untitled Decision"
-        }
+        decision.displayTitle
     }
 }
 

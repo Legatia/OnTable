@@ -12,12 +12,18 @@ class ShareService {
     func generateCardImage(
         decision: Decision,
         isPremium: Bool,
-        template: ShareCardView.CardTemplate
+        template: ShareCardTemplate,
+        backgroundImage: UIImage? = nil,
+        imageScale: CGFloat = 1.0,
+        imageOffset: CGSize = .zero
     ) -> UIImage? {
         let cardView = ShareCardView(
             decision: decision,
             isPremium: isPremium,
-            template: template
+            template: template,
+            backgroundImage: backgroundImage,
+            imageScale: imageScale,
+            imageOffset: imageOffset
         )
 
         // Use ImageRenderer for iOS 16+
@@ -84,12 +90,18 @@ class ShareService {
     func shareDecision(
         _ decision: Decision,
         isPremium: Bool,
-        template: ShareCardView.CardTemplate
+        template: ShareCardTemplate,
+        backgroundImage: UIImage? = nil,
+        imageScale: CGFloat = 1.0,
+        imageOffset: CGSize = .zero
     ) {
         guard let image = generateCardImage(
             decision: decision,
             isPremium: isPremium,
-            template: template
+            template: template,
+            backgroundImage: backgroundImage,
+            imageScale: imageScale,
+            imageOffset: imageOffset
         ) else {
             print("Failed to generate share card image")
             return

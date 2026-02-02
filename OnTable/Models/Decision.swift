@@ -232,6 +232,24 @@ struct Decision: Identifiable, Codable, Equatable {
         guard index >= 0 && index < 26 else { return "\(index + 1)" }
         return String(UnicodeScalar(65 + index)!) // A=65, B=66, etc.
     }
+
+    var displayTitle: String {
+        if !title.isEmpty {
+            return title
+        }
+
+        // Get option titles that aren't empty
+        let optionTitles = options.map { $0.title }.filter { !$0.isEmpty }
+
+        if optionTitles.count >= 2 {
+            let suffix = options.count > 2 ? "..." : ""
+            return "\(optionTitles[0]) vs \(optionTitles[1])\(suffix)"
+        } else if optionTitles.count == 1 {
+            return optionTitles[0]
+        } else {
+            return "Untitled Decision"
+        }
+    }
 }
 
 // MARK: - Participant (for collaboration)
@@ -250,7 +268,7 @@ struct Participant: Identifiable, Codable, Equatable {
 
 // MARK: - Room (for collaboration)
 
-struct Room: Identifiable, Codable {
+struct Room: Identifiable, Codable, Equatable {
     let id: UUID
     let hostName: String
     var participants: [Participant]

@@ -8,6 +8,9 @@ struct ResolutionView: View {
     @State private var showGutCheck = false
     @State private var hasResolved = false
     @State private var showConfetti = false
+    @State private var showingShareSheet = false
+    @State private var showingPaywall = false
+    @ObservedObject var premiumManager = PremiumManager.shared
 
     var body: some View {
         NavigationView {
@@ -40,6 +43,12 @@ struct ResolutionView: View {
                         }
                     }
                 }
+            }
+            .sheet(isPresented: $showingShareSheet) {
+                ShareSheetView(decision: decision)
+            }
+            .sheet(isPresented: $showingPaywall) {
+                PaywallView()
             }
         }
     }
@@ -270,6 +279,34 @@ struct ResolutionView: View {
             Text("Decision saved to history")
                 .font(.caption)
                 .foregroundColor(.secondary)
+
+            // Share Button
+            Button(action: {
+                if premiumManager.features.canShare {
+                    showingShareSheet = true
+                } else {
+                    showingPaywall = true
+                }
+            }) {
+                ZStack(alignment: .topTrailing) {
+                    Image(systemName: "square.and.arrow.up")
+                        .font(.title2)
+                        .foregroundColor(premiumManager.features.canShare ? .accentColor : .secondary)
+                    
+                    if !premiumManager.features.canShare {
+                        Image(systemName: "lock.fill")
+                            .font(.system(size: 10))
+                            .padding(3)
+                            .background(Color.white)
+                            .clipShape(Circle())
+                            .offset(x: 4, y: -4)
+                    }
+                }
+                .padding(12)
+                .background(premiumManager.features.canShare ? Color.accentColor.opacity(0.1) : Color.secondary.opacity(0.1))
+                .clipShape(Circle())
+            }
+            .padding(.top, 8)
         }
     }
 
